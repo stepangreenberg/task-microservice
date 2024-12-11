@@ -7,4 +7,5 @@ export  const config = {
     proxy: process.env.PROXY_URI || 'http://localhost:3000',
     pg_uri: process.env.PG_URI || 'postgres://localhost:5432',
     pg_connect: process.env.PG_CONNECT || 'false',
+    redis_url: process.env.REDIS_URL || 'redis://localhost:6379',
 }
