@@ -1,2 +1,2 @@
-export { healthController } from './health.controller';
-export { TaskController } from './task.controller';
+export * from './health.controller';
+export * from './task.controller';
