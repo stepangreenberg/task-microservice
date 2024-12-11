@@ -9,3 +9,8 @@ export const createTaskSchema = Joi.object({
 export const updateTaskStatusSchema = Joi.object({
     status: Joi.string().valid('pending', 'in-progress', 'done').required()
 });
+
+export const createUserSchema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required()
+});
