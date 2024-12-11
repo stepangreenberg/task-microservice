@@ -5,7 +5,7 @@ export  const config = {
     node: process.env.NODE_ENV || 'development',
     port: process.env.PORT || 3000,
     proxy: process.env.PROXY_URI || 'http://localhost:3000',
-    pg_uri: process.env.PG_URI || 'postgres://localhost:5432',
+    pg_uri: 'postgresql://postgres:postgres@localhost:5432/postgres',
     pg_connect: process.env.PG_CONNECT || 'false',
     redis_url: process.env.REDIS_URL || 'redis://localhost:6379',
 }
