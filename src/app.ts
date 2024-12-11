@@ -4,33 +4,34 @@ configDotenv();
 import express from 'express';
 import routes from './api/routes';
 import {config} from './config';
-import {configureLogger} from "@d2sutils/logging";
 import {AppDataSource} from "./config/data.source";
 
-const port = config.port;
-
 const startService = async () => {
+    console.log("Starting service...");
+    console.log("Database URI:", config.pg_uri); // Add this to check URI
+
     const app = express();
 
-    if (config.pg_connect === 'true') {
-        await AppDataSource.initialize().then(() => {
-            console.log("Data Source has been initialized!");
-        }).catch(error => console.log("Error during Data Source initialization", error));
+    try {
+        console.log("Attempting database connection...");
+        await AppDataSource.initialize();
+        console.log("✅ Database connection successful!");
+    } catch (error) {
+        console.error("❌ Database connection failed:", error);
+        process.exit(1);
     }
 
     app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
-
     app.use(routes);
-    configureLogger(config.proxy, config.name);
 
-    app.listen(port, () => {
-        console.log(`Start service: ${config.name}`);
-        console.log(`\x1b[32mServer is running on port ${port}\x1b[0m`);
+    app.listen(config.port, () => {
+        console.log(`Service name: ${config.name}`);
+        console.log(`🚀 Server is running on port ${config.port}`);
     });
 }
 
+console.log("About to start service..."); // Add this before startService
 startService().catch(error => {
-    console.log("Error during service start", error);
+    console.error("Fatal error during service start:", error);
     process.exit(1);
 });
