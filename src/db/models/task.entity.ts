@@ -13,7 +13,8 @@ export class Task extends BaseEntity {
     description: string;
 
     @Column({ name: 'user_id' })
-    userId: number;
+    user_id: number;
+
 
     @Column({
         type: 'enum',
